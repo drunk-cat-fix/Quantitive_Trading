@@ -6,7 +6,7 @@ import websockets
 from libs.core.config import settings
 from libs.core.db import SessionLocal
 from libs.core.models import MarketBar, PriceTick
-from libs.core.logging import get_logger
+from libs.core.logger import get_logger
 
 logger = get_logger('market_data')
 

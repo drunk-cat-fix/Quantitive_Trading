@@ -1,4 +1,4 @@
-﻿import json
+import json
 import time
 from sqlalchemy import select
 import redis
@@ -6,7 +6,7 @@ from libs.core.config import settings
 from libs.core.db import SessionLocal
 from libs.core.models import Position
 from libs.core.risk import RiskManager
-from libs.core.logging import get_logger
+from libs.core.logger import get_logger
 from libs.strategy.ema_cross import EmaCrossStrategy
 from libs.exchange.paper_executor import PaperExecutor
 
