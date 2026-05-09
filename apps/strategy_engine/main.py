@@ -31,6 +31,7 @@ def run() -> None:
     r = redis.from_url(settings.redis_url, decode_responses=True)
     p = r.pubsub()
     p.subscribe('md.kline')
+    r.setnx('strategy.auto_trade_enabled', 'true')
 
     fast_ma, slow_ma, min_bars = load_active_params(r)
     strategy = EmaCrossStrategy(fast_ma=fast_ma, slow_ma=slow_ma, min_bars=min_bars)
@@ -59,6 +60,10 @@ def run() -> None:
         now = time.time()
 
         if signal == 'HOLD':
+            continue
+        auto_trade_enabled = (r.get('strategy.auto_trade_enabled') or 'true').lower() == 'true'
+        if not auto_trade_enabled:
+            logger.info('auto_trade_disabled_skip', signal=signal, price=close)
             continue
         if now - last_trade_ts < settings.cooldown_seconds:
             continue

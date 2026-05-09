@@ -82,3 +82,25 @@ See full config in `.env.example`.
 - 当前版本仅支持 paper（不支持实盘下单）。
 - Default exchange is Binance.
 - 默认交易所为 Binance。
+
+## 8. Export 5Y Dataset (CSV) / 导出近5年CSV训练集
+
+Export Binance historical OHLCV for BTC/ETH (default: 5 years, `1m`):
+导出 Binance 的 BTC/ETH 历史K线（默认：近5年、`1m`）：
+
+```powershell
+python apps/optimizer/export_binance_csv.py
+```
+
+Custom timeframe/output:
+自定义周期和输出目录：
+
+```powershell
+python apps/optimizer/export_binance_csv.py --symbols BTC/USDT ETH/USDT --timeframe 5m --years 5 --out-dir data/datasets
+```
+
+Output files:
+输出文件：
+
+- `data/datasets/binance_BTCUSDT_1m_5y.csv`
+- `data/datasets/binance_ETHUSDT_1m_5y.csv`
